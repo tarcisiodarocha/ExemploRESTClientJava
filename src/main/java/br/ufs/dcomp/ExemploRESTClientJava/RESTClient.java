@@ -21,10 +21,10 @@ public class RESTClient
             String authorizationHeaderValue = "Basic " + java.util.Base64.getEncoder().encodeToString( usernameAndPassword.getBytes() );
      
             // Perform a request
-            String restResource = "https://cat.rmq.cloudamqp.com";
+            String restResource = "http://http-balancer-f260513a2ba99597.elb.us-east-1.amazonaws.com";
             Client client = ClientBuilder.newClient();
             Response resposta = client.target( restResource )
-            	//.path("/api/exchanges/iagffzqu/ufs/bindings/source") // lista todos os binds que tem "ufs" como source	
+            	//.path("/api/exchanges/%2f/ufs/bindings/source") // lista todos os binds que tem o exchange "ufs" como source	
                 .path("/api/exchanges")
             	.request(MediaType.APPLICATION_JSON)
                 .header( authorizationHeaderName, authorizationHeaderValue ) // The basic authentication header goes here
@@ -33,7 +33,9 @@ public class RESTClient
             if (resposta.getStatus() == 200) {
             	String json = resposta.readEntity(String.class);
                 System.out.println(json);
-            }    
+            } else {
+                System.out.println(resposta.getStatus());
+            }   
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

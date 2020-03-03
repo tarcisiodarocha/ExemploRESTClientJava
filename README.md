@@ -1,8 +1,3 @@
 # ExemploRESTClientJava
 
-## Pré-requisito: Java 8
-```
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-```
+OBS: ao usar a api http do RabbitMQ, quando o parâmetro "vhost" é o default "/", usa-se "%2f" ao invés de "/".
